@@ -46,10 +46,10 @@ void solve()
 	double lastxindex = -1;
 	set<pair<pair<double, double>, double>> s;
 
-	for (int i = 0; i < vec.size(); i++) {	
+	for (int i = 0; i < vec.size(); i++) {
 		if (s.empty()) {
 			lastxindex = vec[i].x;
-			s.insert({{vec[i].y,vec[i].h},vec[i].x });
+			s.insert({ {vec[i].y,vec[i].h},vec[i].x });
 			continue;
 		}
 
@@ -75,16 +75,19 @@ void solve()
 		}
 
 		if (vec[i].isLeft) {
-			s.insert({ {vec[i].y,vec[i].h},vec[i].x});
+			s.insert({ {vec[i].y,vec[i].h},vec[i].x });
 		}
 		else {
-			s.erase({{vec[i].y,vec[i].h},vec[i].px});
+			s.erase({ {vec[i].y,vec[i].h},vec[i].px });
 		}
 		lastxindex = vec[i].x;
 
 	}
 
-	if(((int)(result*100))%100==0){
+	// 예를들어 0.00997일 경우 0.01에 더 가까운데 *100%100 을 하면 뒤에 997부분이 잘려 0이 되어버리므로 0.001을 더한다.
+	// .2까지만 출력하니까 0.001더해도 결과에는 지장 없음
+	result += 0.001; 
+	if (((int)(result * 100)) % 100 == 0) {
 		printf("%d", (int)result);
 	}
 	else {
